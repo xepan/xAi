@@ -73,10 +73,6 @@ CREATE TABLE IF NOT EXISTS `xai_data` (
 -- Dumping data for table `xai_data`
 --
 
-INSERT INTO `xai_data` (`id`, `session_id`, `name`) VALUES
-(1, 2, '{"ALWAYS":{"ALWAYS":{"meta_data_id":"1","value":"RUN"}},"SERVER":{"HTTP_REFERER":{"meta_data_id":"37","value":"http:\\/\\/localhost\\/xepansaved\\/?page=owner_dashboard"}}}'),
-(2, 2, '{"ALWAYS":{"ALWAYS":{"meta_data_id":"1","value":"RUN"}}}');
-
 -- --------------------------------------------------------
 
 --
@@ -94,9 +90,6 @@ CREATE TABLE IF NOT EXISTS `xai_dimension` (
 --
 -- Dumping data for table `xai_dimension`
 --
-
-INSERT INTO `xai_dimension` (`id`, `epan_id`, `name`) VALUES
-(1, 1, 'Default');
 
 -- --------------------------------------------------------
 
@@ -120,15 +113,6 @@ CREATE TABLE IF NOT EXISTS `xai_information` (
 --
 -- Dumping data for table `xai_information`
 --
-
-INSERT INTO `xai_information` (`id`, `session_id`, `data_id`, `value`, `weight`, `meta_information_id`) VALUES
-(1, 2, 2, 'Firefox', '1', 3),
-(2, 2, 2, 'Linux', '1', 4),
-(3, 2, 2, '0', '1', 10),
-(4, 2, 2, '1', '1', 7),
-(5, 2, 2, '1', '1', 8),
-(6, 2, 2, 'home', '1', 5),
-(7, 2, 2, 'home', '1', 6);
 
 -- --------------------------------------------------------
 
@@ -293,10 +277,6 @@ CREATE TABLE IF NOT EXISTS `xai_session` (
 --
 -- Dumping data for table `xai_session`
 --
-
-INSERT INTO `xai_session` (`id`, `name`, `type`, `is_goal_achieved`, `created_at`, `updated_at`) VALUES
-(1, 'r90121c5k3l5471hrcojfc1444', 'website', 0, '2014-10-26 16:50:57', '2014-10-26 16:50:57'),
-(2, 'aghcip6o4flc3cireoq4ilthc2', 'website', 0, '2014-10-26 20:05:15', '2014-10-26 20:06:15');
 
 -- --------------------------------------------------------
 
