@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2014 at 01:23 PM
+-- Generation Time: Oct 26, 2014 at 08:08 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.3.10-1ubuntu3.13
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `xepanai`
+-- Database: `xepan-saved`
 --
 
 -- --------------------------------------------------------
@@ -67,7 +67,15 @@ CREATE TABLE IF NOT EXISTS `xai_data` (
   `name` text,
   PRIMARY KEY (`id`),
   KEY `fk_session_id` (`session_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `xai_data`
+--
+
+INSERT INTO `xai_data` (`id`, `session_id`, `name`) VALUES
+(1, 2, '{"ALWAYS":{"ALWAYS":{"meta_data_id":"1","value":"RUN"}},"SERVER":{"HTTP_REFERER":{"meta_data_id":"37","value":"http:\\/\\/localhost\\/xepansaved\\/?page=owner_dashboard"}}}'),
+(2, 2, '{"ALWAYS":{"ALWAYS":{"meta_data_id":"1","value":"RUN"}}}');
 
 -- --------------------------------------------------------
 
@@ -81,7 +89,14 @@ CREATE TABLE IF NOT EXISTS `xai_dimension` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_epan_id` (`epan_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `xai_dimension`
+--
+
+INSERT INTO `xai_dimension` (`id`, `epan_id`, `name`) VALUES
+(1, 1, 'Default');
 
 -- --------------------------------------------------------
 
@@ -100,7 +115,20 @@ CREATE TABLE IF NOT EXISTS `xai_information` (
   KEY `fk_session_id` (`session_id`),
   KEY `fk_data_id` (`data_id`),
   KEY `fk_meta_information_id` (`meta_information_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `xai_information`
+--
+
+INSERT INTO `xai_information` (`id`, `session_id`, `data_id`, `value`, `weight`, `meta_information_id`) VALUES
+(1, 2, 2, 'Firefox', '1', 3),
+(2, 2, 2, 'Linux', '1', 4),
+(3, 2, 2, '0', '1', 10),
+(4, 2, 2, '1', '1', 7),
+(5, 2, 2, '1', '1', 8),
+(6, 2, 2, 'home', '1', 5),
+(7, 2, 2, 'home', '1', 6);
 
 -- --------------------------------------------------------
 
@@ -125,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `xai_informationextractor` (
 --
 
 INSERT INTO `xai_informationextractor` (`id`, `meta_data_id`, `name`, `code`, `order`, `repetation_handler`, `mark_triggering_information`) VALUES
-(1, 1, 'Country', '$loc_info = file_get_contents(''http://ipinfo.io/''.$_SERVER[''REMOTE_ADDR''].''/json'');\r\n$loc_info = json_decode($loc_info,true);\r\n$result=$loc_info[''country''];', 0, 'discard_if_repeated_key', 1),
+(1, 1, 'Country', '$loc_info = @file_get_contents(''http://ipinfo.io/''.$_SERVER[''REMOTE_ADDR''].''/json'');\r\n$loc_info = json_decode($loc_info,true);\r\n$result=$loc_info[''country''];', 0, 'discard_if_repeated_key', 1),
 (2, 1, 'City', '$result=$loc_info[''city''];', 1, 'discard_if_repeated_key', 1),
 (3, 1, 'Browser', '$browser = $this->add(''xAi/Controller_Utility'')->getBrowserOS();\r\n$result=$browser[''browser''];', 2, 'discard_if_repeated_key', 1),
 (4, 1, 'OS', '$result=$browser[''platform''];', 3, 'discard_if_repeated_key', 1),
@@ -260,7 +288,15 @@ CREATE TABLE IF NOT EXISTS `xai_session` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `xai_session`
+--
+
+INSERT INTO `xai_session` (`id`, `name`, `type`, `is_goal_achieved`, `created_at`, `updated_at`) VALUES
+(1, 'r90121c5k3l5471hrcojfc1444', 'website', 0, '2014-10-26 16:50:57', '2014-10-26 16:50:57'),
+(2, 'aghcip6o4flc3cireoq4ilthc2', 'website', 0, '2014-10-26 20:05:15', '2014-10-26 20:06:15');
 
 -- --------------------------------------------------------
 
