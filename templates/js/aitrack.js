@@ -40,7 +40,7 @@ $.each({
 	},
 
 	initEngagingText: function(){
-		$.atk4.includeJS("./epan-components/Ai/templates/js/jquery.expander.min.js");
+		$.atk4.includeJS("./epan-components/xAi/templates/js/jquery.expander.min.js");
 		$.atk4(function(){
 			$('[component_type=EngagingText]').each(function(index){
 				$(this).expander(temp = {
