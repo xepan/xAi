@@ -54,7 +54,7 @@ class Model_Reception extends \Model_Table{
 					$new_meta_data = $this->add('xAi/Model_MetaData');
 					$new_meta_data['from'] = $sensor_name;
 					$new_meta_data['name'] = $key;
-					$new_meta_data['last_value'] = $value;
+					$new_meta_data['last_value'] = is_array($value)?json_encode($value):$value;
 					if($sensor_name=='ALWAYS') $new_meta_data['action'] = 2 ;// always
 					$new_meta_data->save();
 					$new_meta_data->destroy();
