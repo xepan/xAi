@@ -33,7 +33,7 @@ $.each({
 		});
 
 		$(id).on('removeComponent',function(){
-			alert('removed');
+			// alert('removed');
 		});
 
 		$('body').trigger('checkInView.inview');
