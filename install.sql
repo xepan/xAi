@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2014 at 08:08 PM
--- Server version: 5.5.38
--- PHP Version: 5.3.10-1ubuntu3.13
+-- Generation Time: Nov 02, 2014 at 02:08 PM
+-- Server version: 5.5.38-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.4
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `xepan-saved`
+-- Database: `xepan-marketing`
 --
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `xai_blocks` (
   PRIMARY KEY (`id`),
   KEY `fk_epan_id` (`epan_id`),
   KEY `fk_dimension_id` (`dimension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -67,15 +67,7 @@ CREATE TABLE IF NOT EXISTS `xai_data` (
   `name` text,
   PRIMARY KEY (`id`),
   KEY `fk_session_id` (`session_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `xai_data`
---
-
-INSERT INTO `xai_data` (`id`, `session_id`, `name`) VALUES
-(1, 2, '{"ALWAYS":{"ALWAYS":{"meta_data_id":"1","value":"RUN"}},"SERVER":{"HTTP_REFERER":{"meta_data_id":"37","value":"http:\\/\\/localhost\\/xepansaved\\/?page=owner_dashboard"}}}'),
-(2, 2, '{"ALWAYS":{"ALWAYS":{"meta_data_id":"1","value":"RUN"}}}');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -89,14 +81,7 @@ CREATE TABLE IF NOT EXISTS `xai_dimension` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_epan_id` (`epan_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `xai_dimension`
---
-
-INSERT INTO `xai_dimension` (`id`, `epan_id`, `name`) VALUES
-(1, 1, 'Default');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -115,20 +100,7 @@ CREATE TABLE IF NOT EXISTS `xai_information` (
   KEY `fk_session_id` (`session_id`),
   KEY `fk_data_id` (`data_id`),
   KEY `fk_meta_information_id` (`meta_information_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `xai_information`
---
-
-INSERT INTO `xai_information` (`id`, `session_id`, `data_id`, `value`, `weight`, `meta_information_id`) VALUES
-(1, 2, 2, 'Firefox', '1', 3),
-(2, 2, 2, 'Linux', '1', 4),
-(3, 2, 2, '0', '1', 10),
-(4, 2, 2, '1', '1', 7),
-(5, 2, 2, '1', '1', 8),
-(6, 2, 2, 'home', '1', 5),
-(7, 2, 2, 'home', '1', 6);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -163,7 +135,7 @@ INSERT INTO `xai_informationextractor` (`id`, `meta_data_id`, `name`, `code`, `o
 (8, 1, 'Returning Visit', '$result = isset( $_COOKIE[''web''] ) ? 1 : 0 ;', 6, 'discard_if_repeated_key', 1),
 (9, 43, 'iblock', '$temp = $this->add(''xAi/Model_IBlockContent'');\r\n$temp->addCondition(''iblock_id'',$current_data_value);\r\n$temp->tryLoadAny();\r\n$result = $temp->id;', 0, 'always_add', 0),
 (10, 1, 'isBot', '$isBot=isset($_SERVER[''HTTP_USER_AGENT'']) && preg_match(''/bot|crawl|slurp|spider/i'', $_SERVER[''HTTP_USER_AGENT''])?1:0;\r\n$result=$isBot;', 4, 'discard_if_repeated_key', 0),
-(11, 37, 'Referrer', '$result = $current_data_value;', 0, 'discard_if_repeated_key', 0);
+(11, 37, 'Referrer', '$self_host = $_SERVER[''HTTP_HOST''];\r\n$self_host = parse_url($self_host);\r\n$self_host = $self_host[''host''];\r\n\r\n$ref=$current_data_value;\r\n$ref_host = parse_url($ref);\r\n$ref_host = $ref_host[''host''];\r\n\r\nif($ref_host == $self_host){\r\n$result=null;\r\n}else{\r\n$result = $current_data_value;\r\n}', 0, 'discard_if_repeated_key', 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `xai_meta_data` (
   `description` text,
   `action` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `xai_meta_data`
@@ -230,7 +202,19 @@ INSERT INTO `xai_meta_data` (`id`, `from`, `name`, `last_value`, `description`, 
 (42, 'POST', 'dimension_id', '2', NULL, '-1'),
 (43, 'POST', 'eventname', 'Visible', '', '2'),
 (44, 'GET', 'cut_page', '1', NULL, '-1'),
-(50, 'SERVER', 'HTTP_ORIGIN', 'http://localhost', NULL, '-1');
+(50, 'SERVER', 'HTTP_ORIGIN', 'http://localhost', NULL, '-1'),
+(51, 'SERVER', 'UNIQUE_ID', 'VE4MHn8AAQEAABO3OUkAAAAA', NULL, '-1'),
+(52, 'SERVER', 'REQUEST_SCHEME', 'http', NULL, '-1'),
+(53, 'SERVER', 'CONTEXT_PREFIX', '', NULL, '-1'),
+(54, 'SERVER', 'CONTEXT_DOCUMENT_ROOT', '/var/www', NULL, '-1'),
+(55, 'SERVER', 'REQUEST_TIME_FLOAT', '1414401054.961', NULL, '-1'),
+(56, 'GET', 'epan', 'web', NULL, '-1'),
+(57, 'GET', 'subpage', 'home', NULL, '-1'),
+(58, 'GET', 'email', 'gowravvishwakarma@gmail.com', NULL, '-1'),
+(59, 'GET', 'category_id', '14', NULL, '-1'),
+(60, 'SERVER', 'HTTP_VIA', '1.1 mail (squid/3.3.8)', NULL, '-1'),
+(61, 'SERVER', 'HTTP_X_FORWARDED_FOR', '192.168.1.104', NULL, '-1'),
+(62, 'GET', 'xEnquiryNSubscription_categrory_id', '14', NULL, '-1');
 
 -- --------------------------------------------------------
 
@@ -288,15 +272,7 @@ CREATE TABLE IF NOT EXISTS `xai_session` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `xai_session`
---
-
-INSERT INTO `xai_session` (`id`, `name`, `type`, `is_goal_achieved`, `created_at`, `updated_at`) VALUES
-(1, 'r90121c5k3l5471hrcojfc1444', 'website', 0, '2014-10-26 16:50:57', '2014-10-26 16:50:57'),
-(2, 'aghcip6o4flc3cireoq4ilthc2', 'website', 0, '2014-10-26 20:05:15', '2014-10-26 20:06:15');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -337,7 +313,7 @@ INSERT INTO `xai_visual_analytic` (`id`, `name`, `push_to_main_dashboard`, `push
 (2, 'Top Landing Pages', 1, 1, NULL, 'grid', 1, '10', 'Landing Pages', '', 5, 'WEIGHTSUM', 2, 3, 2, 2, 1, 2, 2),
 (3, 'Top Browsers', 0, 1, NULL, 'grid', 1, '10', 'Browsers', '', 3, 'COUNT', 0, 0, 3, 2, 0, 0, 0),
 (4, 'Top Exit Page', 1, 1, NULL, 'grid', 1, '10', 'Exit Pages', '', 6, 'COUNT', 4, 3, 4, 3, 0, 0, 0),
-(5, 'Top Referrer Sites', 0, 1, NULL, 'grid', 1, '10', 'Referres', '', 11, 'WEIGHTSUM', 0, 0, 3, 2, 0, 0, 0),
+(5, 'Top Referrer Sites', 0, 1, NULL, 'grid', 1, '10', 'Referrers', '', 11, 'WEIGHTSUM', 0, 0, 3, 2, 0, 0, 0),
 (6, 'Users Live On Site', 0, 0, NULL, 'grid', 1, '20', 'Visitors', '', 7, 'COUNT', 0, 0, 0, 0, 1, 1, 2);
 
 -- --------------------------------------------------------

@@ -9,7 +9,7 @@ class page_xAi_page_install extends page_componentBase_page_install {
 		
 		$this->install();
 		
-		$default_dimesion = $this->add('xAi/Model_Dimesion');
+		$default_dimesion = $this->add('xAi/Model_Dimension');
 		$default_dimesion['name'] = 'Default';
 		$default_dimesion->save();
 
