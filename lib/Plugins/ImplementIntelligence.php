@@ -15,6 +15,11 @@ class Plugins_ImplementIntelligence extends \componentBase\Plugin {
 
 	function Plugins_ImplementIntelligence($obj){
 
+		if($_GET['bypass_intelligency']){
+			$this->api->stickyGET('bypass_intelligency');
+			return;
+		}
+
 		if(strpos($this->api->page, 'owner') !== false or strpos($this->api->page, 'install') !== false ) return;
 
 		$this->executive = $executive = $this->add('xAi/Model_SalesExecutive');
