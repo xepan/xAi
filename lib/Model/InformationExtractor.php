@@ -27,7 +27,7 @@ class Model_InformationExtractor extends \Model_Table {
 			)->mandatory(true);
 
 		$this->addField('mark_triggering_information')->type('boolean')->defaultValue(false);
-
+		$this->addField('is_active')->type('boolean')->defaultValue(true);
 		$this->addHook('beforeSave',$this);
 		$this->addHook('beforeDelete',$this);
 		$this->addHook('afterInsert',$this);
