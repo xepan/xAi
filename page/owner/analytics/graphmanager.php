@@ -2,8 +2,12 @@
 
 class page_xAi_page_owner_analytics_graphmanager extends page_componentBase_page_owner_main{
 
+	function init(){
+		parent::init();
+		$this->rename('grph'); // Shorten name length for suhosin restrictions
+	}
+	
 	function page_index(){
-
 		if($_GET['exec']){
 			$this->api->stickyGET('exec');
 			$visual_analytic = $this->add('xAi/Model_VisualAnalytic')->load($_GET['exec']);

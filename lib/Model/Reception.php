@@ -109,6 +109,8 @@ class Model_Reception extends \Model_Table{
 				}
 
 				$extractors = $meta_data_of_this_data->ref('xAi/Model_InformationExtractor')->setOrder('order');
+				$extractors->addCondition('is_active',true);
+				
 				foreach ($extractors as $junk) {
 					// extract information 
 					$result = null;
