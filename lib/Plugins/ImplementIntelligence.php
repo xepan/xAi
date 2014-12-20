@@ -41,7 +41,7 @@ class Plugins_ImplementIntelligence extends \componentBase\Plugin {
 	}
 
 
-  	function Plugins_SelectIBlock($obj,$page){
+  	function Plugins_SelectIBlock($obj,&$page){
 
   		if(strpos($this->api->page, 'owner') !== false or strpos($this->api->page, 'install') !== false ) return;
 
@@ -73,20 +73,29 @@ class Plugins_ImplementIntelligence extends \componentBase\Plugin {
 		
 		// echo "</pre>";
 
-  		$l=$this->api->locate('addons',__NAMESPACE__, 'location');
-		$this->api->pathfinder->addLocation(
-			$this->api->locate('addons',__NAMESPACE__),
-			array(
-		  		'template'=>'templates',
-		  		'css'=>'templates/css',
-		  		'js'=>'templates/js'
-				)
-			)->setParent($l);
+  		$this->app->pathfinder->base_location->addRelativeLocation(
+		    'epan-components/'.__NAMESPACE__, array(
+		        'php'=>'lib',
+		        'template'=>'templates',
+		        'css'=>'templates/css',
+		        'js'=>'templates/js',
+		    )
+		);
+		
+  // 		$l=$this->api->locate('addons',__NAMESPACE__, 'location');
+		// $this->api->pathfinder->addLocation(
+		// 	$this->api->locate('addons',__NAMESPACE__),
+		// 	array(
+		//   		'template'=>'templates',
+		//   		'css'=>'templates/css',
+		//   		'js'=>'templates/js'
+		// 		)
+		// 	)->setParent($l);
 		$this->js(true)->_load('jquery.inview')->_load('jquery.expander.min')->_load('aitrack')->univ()->initaitrack();
 
 		include_once (getcwd().'/lib/phpQuery.php');
 		$pq = new \phpQuery();
-		$doc =& $pq->newDocument(trim($page['content']));
+		$doc = $pq->newDocument(trim($page['content']));
 
 		// remove inner Iblocks first 
 		foreach ($doc['[component_type=IntelligentBlock] [component_type=IntelligentBlock]'] as $inners) {
